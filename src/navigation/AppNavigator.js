@@ -7,7 +7,7 @@ import DashboardScreen from '../screens/DashboardScreen';
 import DepositScreen from '../screens/DepositScreen';
 import WithdrawScreen from '../screens/WithdrawScreen';
 import TransactionHistoryScreen from '../screens/TransactionHistoryScreen';
-import TestScreen from '../screens/TestScreen';
+// import TestScreen from '../screens/TestScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,9 +15,9 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        // screenOptions={{headerShown: false}}
-        initialRouteName="Test">
-        <Stack.Screen name="Test" component={TestScreen} />
+        screenOptions={{headerShown: false}}
+        initialRouteName="Login">
+        {/* <Stack.Screen name="Test" component={TestScreen} /> */}
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />

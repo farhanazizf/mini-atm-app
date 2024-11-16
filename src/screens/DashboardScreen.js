@@ -33,7 +33,10 @@ const DashboardScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Dashboard</Text>
-      <Text style={styles.balance}>Current Balance: Rp {balance}</Text>
+      <View style={styles.balanceWrapper}>
+        <Text style={styles.balance}>Current Balance:{balance}</Text>
+        <Text style={styles.balance}>{rupiah(balance)}</Text>
+      </View>
       <Button title="Deposit" onPress={() => navigation.navigate('Deposit')} />
       <Button
         title="Withdraw"
@@ -51,7 +54,8 @@ const DashboardScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {flex: 1, justifyContent: 'center', padding: 16},
   title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
-  balance: {fontSize: 18, marginBottom: 20},
+  balance: {fontSize: 18},
+  balanceWrapper: {marginBottom: 16},
 });
 
 export default DashboardScreen;

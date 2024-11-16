@@ -4,16 +4,13 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppNavigator from './navigation/AppNavigator';
 import Toast from 'react-native-toast-message';
 
-// Import the theme configuration
-// import './utilities/ThemeProvider';
-
 const App = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      {/* <SafeAreaProvider> */}
-      <AppNavigator />
-      <Toast />
-      {/* </SafeAreaProvider> */}
+      <SafeAreaProvider>
+        <AppNavigator />
+        <Toast />
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 };

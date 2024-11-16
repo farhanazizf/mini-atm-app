@@ -42,10 +42,10 @@ const LoginScreen = ({navigation}) => {
         onChangeText={setPassword}
       />
       <Button title="Login" onPress={handleLogin} />
-      <Button
+      {/* <Button
         title="Register"
         onPress={() => navigation.navigate('Register')}
-      />
+      /> */}
     </View>
   );
 };
