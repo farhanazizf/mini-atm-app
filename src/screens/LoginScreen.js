@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Text, TextField, Button, Colors} from 'react-native-ui-lib';
+import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../api/client';
@@ -28,66 +27,33 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text textPrimary heading style={styles.title}>
-        Login
-      </Text>
-      <TextField
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        style={styles.input}
         placeholder="Email"
         value={email}
-        onChange={e => setEmail(e.target.value)}
-        floatingPlaceholder
-        text70
-        underlineColor={Colors.primary}
-        style={styles.input}
+        onChangeText={setEmail}
       />
-      <TextField
+      <TextInput
+        style={styles.input}
         placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
         secureTextEntry
-        floatingPlaceholder
-        text70
-        underlineColor={Colors.primary}
-        style={styles.input}
+        value={password}
+        onChangeText={setPassword}
       />
+      <Button title="Login" onPress={handleLogin} />
       <Button
-        label="Login"
-        onPress={handleLogin}
-        backgroundColor={Colors.primary}
-        style={styles.button}
-      />
-      {/* <Button
-        label="Register"
+        title="Register"
         onPress={() => navigation.navigate('Register')}
-        link
-        color={Colors.primary}
-        style={styles.linkButton}
-      /> */}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: Colors.background,
-  },
-  title: {
-    marginBottom: 30,
-    alignSelf: 'center',
-  },
-  input: {
-    marginBottom: 20,
-  },
-  button: {
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  linkButton: {
-    alignSelf: 'center',
-  },
+  container: {flex: 1, justifyContent: 'center', padding: 16},
+  title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
+  input: {borderWidth: 1, marginBottom: 12, padding: 8, borderRadius: 4},
 });
 
 export default LoginScreen;

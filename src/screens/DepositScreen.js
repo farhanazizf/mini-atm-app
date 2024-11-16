@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Text, TextField, Button, Colors} from 'react-native-ui-lib';
+import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 
 import client from '../api/client';
 import Toast from 'react-native-toast-message';
@@ -30,47 +29,23 @@ const DepositScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text heading style={styles.title}>
-        Deposit
-      </Text>
-      <TextField
-        placeholder="Enter Amount"
+      <Text style={styles.title}>Deposit</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter amount"
+        keyboardType="numeric"
         value={amount}
         onChangeText={setAmount}
-        keyboardType="numeric"
-        floatingPlaceholder
-        text70
-        underlineColor={Colors.primary}
-        style={styles.input}
       />
-      <Button
-        label="Deposit"
-        onPress={handleDeposit}
-        backgroundColor={Colors.primary}
-        style={styles.button}
-      />
+      <Button title="Deposit" onPress={handleDeposit} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: Colors.background,
-  },
-  title: {
-    marginBottom: 30,
-    alignSelf: 'center',
-  },
-  input: {
-    marginBottom: 20,
-  },
-  button: {
-    borderRadius: 8,
-    marginTop: 10,
-  },
+  container: {flex: 1, justifyContent: 'center', padding: 16},
+  title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
+  input: {borderWidth: 1, marginBottom: 12, padding: 8, borderRadius: 4},
 });
 
 export default DepositScreen;

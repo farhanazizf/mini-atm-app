@@ -5,16 +5,16 @@ import AppNavigator from './navigation/AppNavigator';
 import Toast from 'react-native-toast-message';
 
 // Import the theme configuration
-import './utilities/ThemeProvider';
+// import './utilities/ThemeProvider';
 
 const App = () => {
   return (
-    // <GestureHandlerRootView style={{flex: 1}}>
-    <SafeAreaProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      {/* <SafeAreaProvider> */}
       <AppNavigator />
       <Toast />
-    </SafeAreaProvider>
-    // </GestureHandlerRootView>
+      {/* </SafeAreaProvider> */}
+    </GestureHandlerRootView>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Text, Button, Colors} from 'react-native-ui-lib';
+import {View, Text, Button, StyleSheet} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../api/client';
@@ -33,67 +32,26 @@ const DashboardScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text heading style={styles.title}>
-        Dashboard
-      </Text>
-      <View style={styles.wrapperBalance}>
-        <Text textPrimary text50 style={styles.balance}>
-          Current Balance
-        </Text>
-        <Text textPrimary text50 style={styles.balance}>
-          {rupiah(balance)}
-        </Text>
-      </View>
+      <Text style={styles.title}>Dashboard</Text>
+      <Text style={styles.balance}>Current Balance: Rp {balance}</Text>
+      <Button title="Deposit" onPress={() => navigation.navigate('Deposit')} />
       <Button
-        label="Deposit"
-        onPress={() => navigation.navigate('Deposit')}
-        style={styles.button}
-      />
-      <Button
-        label="Withdraw"
+        title="Withdraw"
         onPress={() => navigation.navigate('Withdraw')}
-        style={styles.button}
       />
       <Button
-        label="Transaction History"
+        title="Transaction History"
         onPress={() => navigation.navigate('TransactionHistory')}
-        style={styles.button}
       />
-      <Button
-        label="Logout"
-        onPress={handleLogout}
-        link
-        color="red"
-        style={styles.linkButton}
-      />
+      <Button title="Logout" onPress={handleLogout} color="red" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: Colors.background,
-  },
-  title: {
-    marginBottom: 20,
-    alignSelf: 'center',
-  },
-  wrapperBalance: {
-    marginBottom: 16,
-  },
-  balance: {
-    alignSelf: 'center',
-  },
-  button: {
-    marginBottom: 15,
-    borderRadius: 8,
-  },
-  linkButton: {
-    alignSelf: 'center',
-  },
+  container: {flex: 1, justifyContent: 'center', padding: 16},
+  title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
+  balance: {fontSize: 18, marginBottom: 20},
 });
 
 export default DashboardScreen;

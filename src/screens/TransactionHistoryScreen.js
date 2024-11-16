@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
-import {Text, Colors} from 'react-native-ui-lib';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 
 import client from '../api/client';
 
@@ -41,26 +40,10 @@ const TransactionHistoryScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    backgroundColor: Colors.background,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  transaction: {
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.grey60,
-  },
-  type: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
+  container: {flex: 1, padding: 16},
+  title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
+  transaction: {padding: 12, borderBottomWidth: 1, borderColor: '#ccc'},
+  type: {fontWeight: 'bold', fontSize: 16, marginBottom: 4},
 });
 
 export default TransactionHistoryScreen;
