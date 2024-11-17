@@ -1,5 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Button, StyleSheet, TouchableHighlight} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableHighlight,
+  ScrollView,
+  RefreshControl,
+} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../api/client';
@@ -8,8 +16,9 @@ import Toast from 'react-native-toast-message';
 
 const DashboardScreen = ({navigation}) => {
   const [balance, setBalance] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
-  const fetchBalance = async () => {
+  const fetchBalance = useCallback(async () => {
     try {
       const response = await client.get('/users/balance');
       setBalance(response.data.balance);
@@ -25,7 +34,14 @@ const DashboardScreen = ({navigation}) => {
         navigation.navigate('Login');
       }
     }
-  };
+  }, [navigation]);
+
+  // Pull-to-refresh handler
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    fetchBalance();
+    setRefreshing(false);
+  }, [fetchBalance]);
 
   const handleLogout = async () => {
     try {
@@ -46,42 +62,53 @@ const DashboardScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Dashboard</Text>
-      <View style={styles.balanceWrapper}>
-        <Text style={styles.balance}>Current Balance</Text>
-        <Text style={styles.balance}>{rupiah(balance)}</Text>
+    <ScrollView
+      contentContainerStyle={styles.main}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      <View style={styles.container}>
+        <Text style={styles.title}>Dashboard</Text>
+        <View style={styles.balanceWrapper}>
+          <Text style={styles.balance}>Current Balance</Text>
+          <Text style={styles.balance}>{rupiah(balance)}</Text>
+        </View>
+
+        <TouchableHighlight style={styles.button}>
+          <Button
+            title="Deposit"
+            onPress={() => navigation.navigate('Deposit')}
+          />
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.button}>
+          <Button
+            title="Withdraw"
+            onPress={() => navigation.navigate('Withdraw')}
+          />
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.button}>
+          <Button
+            title="Transaction History"
+            onPress={() => navigation.navigate('TransactionHistory')}
+          />
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.button}>
+          <Button title="Logout" onPress={handleLogout} color="red" />
+        </TouchableHighlight>
       </View>
-
-      <TouchableHighlight style={styles.button}>
-        <Button
-          title="Deposit"
-          onPress={() => navigation.navigate('Deposit')}
-        />
-      </TouchableHighlight>
-
-      <TouchableHighlight style={styles.button}>
-        <Button
-          title="Withdraw"
-          onPress={() => navigation.navigate('Withdraw')}
-        />
-      </TouchableHighlight>
-
-      <TouchableHighlight style={styles.button}>
-        <Button
-          title="Transaction History"
-          onPress={() => navigation.navigate('TransactionHistory')}
-        />
-      </TouchableHighlight>
-
-      <TouchableHighlight style={styles.button}>
-        <Button title="Logout" onPress={handleLogout} color="red" />
-      </TouchableHighlight>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  main: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {flex: 1, justifyContent: 'center', padding: 16},
   title: {
     fontSize: 24,
