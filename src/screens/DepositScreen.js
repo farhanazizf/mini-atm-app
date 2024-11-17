@@ -9,7 +9,7 @@ const DepositScreen = ({navigation}) => {
 
   const handleDeposit = async () => {
     try {
-      const response = await client.post('/users/deposit', {
+      await client.post('/users/deposit', {
         amount: parseInt(amount, 10),
       });
       Toast.show({

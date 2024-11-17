@@ -4,6 +4,7 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../api/client';
 import {rupiah} from '../utilities/currency';
+import withAuth from '../utilities/withAuth';
 
 const DashboardScreen = ({navigation}) => {
   const [balance, setBalance] = useState(0);
@@ -34,7 +35,7 @@ const DashboardScreen = ({navigation}) => {
     <View style={styles.container}>
       <Text style={styles.title}>Dashboard</Text>
       <View style={styles.balanceWrapper}>
-        <Text style={styles.balance}>Current Balance:{balance}</Text>
+        <Text style={styles.balance}>Current Balance</Text>
         <Text style={styles.balance}>{rupiah(balance)}</Text>
       </View>
       <Button title="Deposit" onPress={() => navigation.navigate('Deposit')} />
@@ -55,7 +56,12 @@ const styles = StyleSheet.create({
   container: {flex: 1, justifyContent: 'center', padding: 16},
   title: {fontSize: 24, fontWeight: 'bold', marginBottom: 20},
   balance: {fontSize: 18},
-  balanceWrapper: {marginBottom: 16},
+  balanceWrapper: {
+    marginBottom: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
 });
 
-export default DashboardScreen;
+export default withAuth(DashboardScreen);
