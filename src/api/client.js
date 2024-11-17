@@ -16,18 +16,18 @@ client.interceptors.request.use(async config => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-  console.log('Starting Request', config);
+  // console.log('Starting Request', config);
 
   return config;
 });
 
 client.interceptors.response.use(
   response => {
-    console.log('Response:', response);
+    // console.log('Response:', response);
     return response;
   },
   error => {
-    console.error('Error Response:', error.response || error.message);
+    // console.error('Error Response:', error.response || error.message);
     return Promise.reject(error);
   },
 );
