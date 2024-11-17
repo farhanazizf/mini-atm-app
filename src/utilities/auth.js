@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 
 /**
  * Fungsi untuk memeriksa token JWT.
@@ -8,17 +8,18 @@ import jwt_decode from 'jwt-decode';
 
 export const checkToken = async () => {
   try {
-    const token = await AsyncStorage.getItem('accessToken');
+    const token = await AsyncStorage.getItem('token');
+    // console.log(token);
+    const decoded = jwtDecode(token);
+    // console.log('token_decode', decoded);
     if (!token) {
       return false; // Token tidak ditemukan
     }
 
-    const decoded = jwt_decode(token);
     const currentTime = Date.now() / 1000; // Waktu sekarang dalam detik
-
     if (decoded.exp < currentTime) {
       // Token kedaluwarsa
-      await AsyncStorage.removeItem('accessToken'); // Hapus token dari AsyncStorage
+      await AsyncStorage.removeItem('token'); // Hapus token dari AsyncStorage
       return false;
     }
 

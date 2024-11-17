@@ -1,16 +1,10 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../api/client';
 import Toast from 'react-native-toast-message';
+import Loading from '../utilities/Loading';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -40,9 +34,7 @@ const LoginScreen = ({navigation}) => {
     <View style={styles.container}>
       <Text style={styles.title}>Login Mini ATM</Text>
       {loading ? (
-        <View style={styles.loading}>
-          <ActivityIndicator size="large" />
-        </View>
+        <Loading />
       ) : (
         <>
           <TextInput
